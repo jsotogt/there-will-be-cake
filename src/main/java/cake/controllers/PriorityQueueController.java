@@ -17,7 +17,7 @@ public class PriorityQueueController {
 
     }
 
-    @RequestMapping(value = "/request", method = RequestMethod.GET)
+    @RequestMapping(value = "/requests", method = RequestMethod.POST)
     public ResponseEntity dequeue() {
 
         return new ResponseEntity(HttpStatus.OK); // TODO implement
@@ -46,7 +46,7 @@ public class PriorityQueueController {
     }
 
     @RequestMapping(value = "/requests/average/{time}", method = RequestMethod.GET)
-    public ResponseEntity position(@PathVariable("time") String time) {
+    public ResponseEntity average(@PathVariable("time") String time) {
 
         return new ResponseEntity(HttpStatus.OK); // TODO implement
 
