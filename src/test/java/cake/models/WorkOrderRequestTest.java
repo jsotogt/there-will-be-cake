@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -41,9 +40,8 @@ public class WorkOrderRequestTest {
         // when:
         WorkOrderRequest w = new WorkOrderRequest(id, date);
 
-
         // then:
-        assertEquals(id, w.getId());
+        assertEquals(id, w.id());
     }
 
     @Test
@@ -55,9 +53,8 @@ public class WorkOrderRequestTest {
         // when:
         WorkOrderRequest w = new WorkOrderRequest(id, date);
 
-
         // then:
-        assertEquals(date, w.getDate());
+        assertEquals(date, w.date());
 
     }
 }

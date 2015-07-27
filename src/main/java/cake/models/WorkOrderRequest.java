@@ -15,11 +15,11 @@ public class WorkOrderRequest {
         requestDate = date;
     }
 
-    public Long getId() {
+    public Long id() {
         return requestorId;
     }
 
-    public Date getDate() {
+    public Date date() {
         return requestDate;
     }
 }
