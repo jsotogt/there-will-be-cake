@@ -5,10 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -34,10 +31,6 @@ public class PriorityQueueTest {
 
     }
 
-    public Date now() {
-        return new Date();
-    }
-
     @Test
     public void testDequeue() throws Exception {
         // given:
@@ -60,5 +53,17 @@ public class PriorityQueueTest {
 
         // then:
         assertTrue(result);
+    }
+
+    @Test
+    public void testQueueIsEmptyOnStart() throws  Exception {
+        // given:
+        PriorityQueue priorityQueue = new PriorityQueue();
+
+        // when:
+        WorkOrderRequest w = priorityQueue.dequeue();
+
+        // then:
+        assertNull(w);
     }
 }
