@@ -7,15 +7,15 @@ import java.util.Date;
  */
 public class WorkOrderRequest {
 
-    private Integer requestorId;
+    private Long requestorId;
     private Date requestDate;
 
-    public WorkOrderRequest(Integer id, Date date) {
+    public WorkOrderRequest(Long id, Date date) {
         requestorId = id;
         requestDate = date;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return requestorId;
     }
 
