@@ -32,7 +32,7 @@ public class PriorityQueueController {
 
         WorkOrderRequest newRequest = new WorkOrderRequest(id, d);
 
-        if(!priorityQueueService.enqueue(newRequest)){
+        if(priorityQueueService.enqueue(newRequest)){
             return new ResponseEntity(HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Requester already has a pending request", HttpStatus.CONFLICT);
@@ -42,7 +42,15 @@ public class PriorityQueueController {
 
     @RequestMapping(value = "/requests", method = RequestMethod.POST)
     public ResponseEntity<WorkOrderRequest> dequeue() {
-        return new ResponseEntity(priorityQueueService.dequeue(), HttpStatus.OK);
+
+        WorkOrderRequest workRequest = priorityQueueService.dequeue();
+
+        if(workRequest == null) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity(workRequest, HttpStatus.OK);
+        }
+
     }
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
