@@ -61,19 +61,15 @@ public class PriorityQueueService {
 
         double n = date.getTime() / 1000; // in seconds
 
-        if(classId == ClassId.NORMAL) {
-            return n;
-        }
-
         if(classId == ClassId.PRIORITY) {
-            return Math.max(3, n * Math.log(n)); // max(3, n log n)
+            return Math.max(3, n * Math.log10(n)); // max(3, n log n)
         }
 
         if(classId == ClassId.VIP) {
-            return Math.max(4, 2 * n * Math.log(n)); // max(4, 2n log n)
+            return Math.max(4, 2 * n * Math.log10(n)); // max(4, 2n log n)
         }
 
-        return 0; // override overrides rank
+        return n; // NORMAL & OVERRIDE
 
     }
 

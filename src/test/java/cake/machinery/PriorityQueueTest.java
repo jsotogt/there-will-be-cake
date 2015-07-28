@@ -167,9 +167,4 @@ public class PriorityQueueTest {
         assertNull(position);
     }
 
-    @Test
-    public void testRank() {
-        fail();
-    }
-
 }
