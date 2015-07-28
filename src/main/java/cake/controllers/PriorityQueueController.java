@@ -1,5 +1,6 @@
 package cake.controllers;
 
+import cake.machinery.ClassId;
 import cake.models.WorkOrderRequest;
 import cake.services.PriorityQueueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +28,16 @@ public class PriorityQueueController {
             return new ResponseEntity<>("invalid id", HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
-        Date d;
+        Date date;
         try {
-            d = priorityQueueService.parse(time);
+            date = priorityQueueService.parse(time);
         } catch (ParseException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        WorkOrderRequest newRequest = new WorkOrderRequest(id, d);
+        ClassId classId = priorityQueueService.getClassId(id);
+
+        WorkOrderRequest newRequest = new WorkOrderRequest(id, date, classId);
 
         if(priorityQueueService.enqueue(newRequest)){
             return new ResponseEntity(HttpStatus.OK);

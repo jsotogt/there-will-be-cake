@@ -1,5 +1,6 @@
 package cake.services;
 
+import cake.machinery.ClassId;
 import cake.machinery.PriorityQueue;
 import cake.models.WorkOrderRequest;
 import org.joda.time.DateTime;
@@ -57,6 +58,78 @@ public class PriorityQueueServiceTest {
 
         // when:
         priorityQueueService.parse(dateString);
+    }
+
+    @Test
+    public void testGetClassVIP() throws Exception {
+        // given:
+        Long id = 10l;
+
+        // when:
+        ClassId classId = priorityQueueService.getClassId(id);
+
+        // then:
+        assertEquals(ClassId.VIP, classId);
+    }
+
+    @Test
+    public void testGetClassPriority() throws Exception {
+        // given:
+        Long id = 9l;
+
+        // when:
+        ClassId classId = priorityQueueService.getClassId(id);
+
+        // then:
+        assertEquals(ClassId.PRIORITY, classId);
+    }
+
+    @Test
+    public void testGetClassOverrride() throws Exception {
+        // given:
+        Long id = 15l;
+
+        // when:
+        ClassId classId = priorityQueueService.getClassId(id);
+
+        // then:
+        assertEquals(ClassId.OVERRIDE, classId);
+    }
+
+    @Test
+    public void testGetClassNormal() throws Exception {
+        // given:
+        Long id = 7l;
+
+        // when:
+        ClassId classId = priorityQueueService.getClassId(id);
+
+        // then:
+        assertEquals(ClassId.NORMAL, classId);
+    }
+
+    @Test
+    public void testGetClassOne() throws Exception {
+        // given:
+        Long id = 1l;
+
+        // when:
+        ClassId classId = priorityQueueService.getClassId(id);
+
+        // then:
+        assertEquals(ClassId.NORMAL, classId);
+    }
+
+    @Test
+    public void testGetClassMax() throws Exception {
+        // given:
+        Long id = 9223372036854775807l;
+
+        // when:
+        ClassId classId = priorityQueueService.getClassId(id);
+
+        // then:
+        assertEquals(ClassId.NORMAL, classId);
     }
 
     @Test

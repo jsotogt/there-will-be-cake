@@ -1,5 +1,6 @@
 package cake.models;
 
+import cake.machinery.ClassId;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,9 +37,10 @@ public class WorkOrderRequestTest {
         // given:
         Long id = id();
         Date date = now();
+        ClassId classId = ClassId.NORMAL;
 
         // when:
-        WorkOrderRequest w = new WorkOrderRequest(id, date);
+        WorkOrderRequest w = new WorkOrderRequest(id, date, classId);
 
         // then:
         assertEquals(id, w.id());
@@ -49,9 +51,10 @@ public class WorkOrderRequestTest {
         // given:
         Long id = id();
         Date date = now();
+        ClassId classId = ClassId.NORMAL;
 
         // when:
-        WorkOrderRequest w = new WorkOrderRequest(id, date);
+        WorkOrderRequest w = new WorkOrderRequest(id, date, classId);
 
         // then:
         assertEquals(date, w.time());

@@ -1,5 +1,6 @@
 package cake.services;
 
+import cake.machinery.ClassId;
 import cake.machinery.PriorityQueue;
 import cake.models.WorkOrderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,33 @@ public class PriorityQueueService {
      */
     public Date parse(String dateTimeString) throws ParseException {
         return new SimpleDateFormat(timeformat).parse(dateTimeString);
+    }
+
+    /**
+     * Determines the class for the given ID based on the following rules:
+     *     (1) IDs that are evenly divisible by 3 are priority IDs.
+     *     (2) IDs that are evenly divisible by 5 are VIP IDs.
+     *     (3) IDs that are evenly divisible by both 3 and 5 are management override.
+     *     (4) IDs that are not evenly divisible by 3 or 5 are normal IDs.
+     * @param id the id to be examined
+     * @return the class for the given id
+     */
+    public ClassId getClassId(long id) {
+
+        if(id % 3 == 0 && id % 5 == 0) {
+            return ClassId.OVERRIDE;
+        }
+
+        if(id % 3 == 0) {
+            return ClassId.PRIORITY;
+        }
+
+        if(id % 5 == 0) {
+            return ClassId.VIP;
+        }
+
+        return ClassId.NORMAL;
+
     }
 
     /**
