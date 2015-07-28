@@ -23,6 +23,10 @@ public class PriorityQueueController {
     @RequestMapping(value = "/requests/{id}/{time}", method = RequestMethod.POST)
     public ResponseEntity<String> enqueue(@PathVariable("id") Long id, @PathVariable("time") String time) {
 
+        if(id <= 0) {
+            return new ResponseEntity<>("invalid id", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+
         Date d;
         try {
             d = priorityQueueService.parse(time);
@@ -71,6 +75,10 @@ public class PriorityQueueController {
 
     @RequestMapping(value = "/requests/{id}/position", method = RequestMethod.GET)
     public ResponseEntity<Integer> position(@PathVariable("id") Long id) {
+
+        if(id <= 0) {
+            return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
 
         Integer position = priorityQueueService.position(id);
 
