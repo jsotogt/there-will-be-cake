@@ -23,16 +23,16 @@ public class PriorityQueueController {
     @RequestMapping(value = "/requests/{id}/{time}", method = RequestMethod.POST)
     public ResponseEntity<String> enqueue(@PathVariable("id") Long id, @PathVariable("time") String time) {
 
-        Date d = null;
+        Date d;
         try {
             d = priorityQueueService.parse(time);
         } catch (ParseException e) {
-            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         WorkOrderRequest newRequest = new WorkOrderRequest(id, d);
 
-        if(!priorityQueueService.enqueue(newRequest)) {
+        if(!priorityQueueService.enqueue(newRequest)){
             return new ResponseEntity(HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Requester already has a pending request", HttpStatus.CONFLICT);
@@ -42,29 +42,35 @@ public class PriorityQueueController {
 
     @RequestMapping(value = "/requests", method = RequestMethod.POST)
     public ResponseEntity<WorkOrderRequest> dequeue() {
-
-        return new ResponseEntity(HttpStatus.OK); // TODO implement
-
+        return new ResponseEntity(priorityQueueService.dequeue(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/requests", method = RequestMethod.GET)
     public ResponseEntity<List<WorkOrderRequest>> list() {
-
-        return new ResponseEntity(HttpStatus.OK); // TODO implement
-
+        return new ResponseEntity(priorityQueueService.list(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/requests/{id}", method = RequestMethod.DELETE)
     public ResponseEntity remove(@PathVariable("id") Long id) {
 
-        return new ResponseEntity(HttpStatus.OK); // TODO implement
+        if(priorityQueueService.delete(id) != null) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
 
     }
 
     @RequestMapping(value = "/requests/{id}/position", method = RequestMethod.GET)
-    public ResponseEntity<Integer> position(@PathVariable("id") Integer id) {
+    public ResponseEntity<Integer> position(@PathVariable("id") Long id) {
 
-        return new ResponseEntity(HttpStatus.OK); // TODO implement
+        Integer position = priorityQueueService.position(id);
+
+        if(position == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity(position, HttpStatus.OK);
 
     }
 
