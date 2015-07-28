@@ -16,12 +16,12 @@ public class PriorityQueueService {
     PriorityQueue priorityQueue;
 
     /**
-     * Parses the given date-string using the slightly modified ISO8601 parse: yyyyMMdd'T'hhmmss.
-     * @param dateString the ISO8601 date-string to be parsed
-     * @return a Date instance set to the given date-string
+     * Parses the given time-string using the slightly modified ISO8601 parse: yyyyMMdd'T'hhmmss.
+     * @param dateTimeString the ISO8601 time-string to be parsed
+     * @return a Date instance set to the given time-string
      */
-    public Date parse(String dateString) throws ParseException {
-        return new SimpleDateFormat("yyyyMMdd'T'hhmmss").parse(dateString);
+    public Date parse(String dateTimeString) throws ParseException {
+        return new SimpleDateFormat("yyyyMMdd'T'hhmmss").parse(dateTimeString);
     }
 
     /**

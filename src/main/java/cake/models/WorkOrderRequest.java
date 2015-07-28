@@ -7,19 +7,19 @@ import java.util.Date;
  */
 public class WorkOrderRequest {
 
-    private Long requestorId;
-    private Date requestDate;
+    private Long id;
+    private Date time;
 
-    public WorkOrderRequest(Long id, Date date) {
-        requestorId = id;
-        requestDate = date;
+    public WorkOrderRequest(Long id, Date time) {
+        this.id = id;
+        this.time = time;
     }
 
     public Long id() {
-        return requestorId;
+        return id;
     }
 
-    public Date date() {
-        return requestDate;
+    public Date time() {
+        return time;
     }
 }

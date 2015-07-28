@@ -54,7 +54,7 @@ public class WorkOrderRequestTest {
         WorkOrderRequest w = new WorkOrderRequest(id, date);
 
         // then:
-        assertEquals(date, w.date());
+        assertEquals(date, w.time());
 
     }
 }

@@ -88,11 +88,11 @@ public class PriorityQueueTest {
         // given:
         WorkOrderRequest firstRequest = mock(WorkOrderRequest.class);
         when(firstRequest.id()).thenReturn(id());
-        when(firstRequest.date()).thenReturn(today());
+        when(firstRequest.time()).thenReturn(today());
 
         WorkOrderRequest secondRequest = mock(WorkOrderRequest.class);
         when(secondRequest.id()).thenReturn(id());
-        when(secondRequest.date()).thenReturn(tomorrow());
+        when(secondRequest.time()).thenReturn(tomorrow());
 
         priorityQueue.enqueue(firstRequest);
 
