@@ -57,8 +57,24 @@ public class PriorityQueueService {
 
     }
 
-    public Long rank(Long id, ClassId classId) {
-        return 0l; // TODO implement
+    public double rank(ClassId classId, Date date) {
+
+        double n = date.getTime() / 1000; // in seconds
+
+        if(classId == ClassId.NORMAL) {
+            return n;
+        }
+
+        if(classId == ClassId.PRIORITY) {
+            return Math.max(3, n * Math.log(n)); // max(3, n log n)
+        }
+
+        if(classId == ClassId.VIP) {
+            return Math.max(4, 2 * n * Math.log(n)); // max(4, 2n log n)
+        }
+
+        return 0; // override overrides rank
+
     }
 
     public WorkOrderRequest workOrderRequestForIdAndTime(Long id, String time) throws Exception {
@@ -67,7 +83,7 @@ public class PriorityQueueService {
 
         ClassId classId = getClassId(id);
 
-        Long rank = rank(id, classId);
+        double rank = rank(classId, date);
 
         return new WorkOrderRequest(id, date, classId, rank);
     }

@@ -45,7 +45,7 @@ public class PriorityQueueTest {
         return ClassId.NORMAL;
     }
 
-    private Long rank() {
+    private double rank() {
         return 0l;
     }
 
@@ -165,6 +165,11 @@ public class PriorityQueueTest {
 
         // then:
         assertNull(position);
+    }
+
+    @Test
+    public void testRank() {
+        fail();
     }
 
 }

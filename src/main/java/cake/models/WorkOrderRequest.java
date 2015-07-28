@@ -14,9 +14,9 @@ public class WorkOrderRequest {
     private Long id;
     private Date time;
     private ClassId classId;
-    private Long rank;
+    private Double rank;
 
-    public WorkOrderRequest(Long id, Date time, ClassId classId, Long rank) {
+    public WorkOrderRequest(Long id, Date time, ClassId classId, Double rank) {
         this.id = id;
         this.time = time;
         this.classId = classId;
@@ -39,7 +39,7 @@ public class WorkOrderRequest {
     }
 
     @JsonIgnore
-    public Long rank() {
+    public Double rank() {
         return rank;
     }
 }

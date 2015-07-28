@@ -38,7 +38,7 @@ public class WorkOrderRequestTest {
         Long id = id();
         Date date = now();
         ClassId classId = ClassId.NORMAL;
-        Long rank = 0l;
+        Double rank = 0.0;
 
         // when:
         WorkOrderRequest w = new WorkOrderRequest(id, date, classId, rank);
@@ -53,7 +53,7 @@ public class WorkOrderRequestTest {
         Long id = id();
         Date date = now();
         ClassId classId = ClassId.NORMAL;
-        Long rank = 0l;
+        Double rank = 0.0;
 
         // when:
         WorkOrderRequest w = new WorkOrderRequest(id, date, classId, rank);

@@ -35,8 +35,8 @@ public class WorkOrderComparatorTest {
         return 9223372036854775807l;
     }
 
-    public long rank() {
-        return 0l;
+    public double rank() {
+        return 0;
     }
 
     private Date yesterday() {
@@ -87,8 +87,8 @@ public class WorkOrderComparatorTest {
     @Test
     public void testCompareNormalNormal() throws Exception {
         // given:
-        WorkOrderRequest o1 = new WorkOrderRequest(id(), yesterday(), ClassId.NORMAL, 10l);
-        WorkOrderRequest o2 = new WorkOrderRequest(id(), now(), ClassId.NORMAL, 20l);
+        WorkOrderRequest o1 = new WorkOrderRequest(id(), yesterday(), ClassId.NORMAL, 10.0);
+        WorkOrderRequest o2 = new WorkOrderRequest(id(), now(), ClassId.NORMAL, 20.0);
 
         // when:
         int result = workOrderComparator.compare(o1, o2);
