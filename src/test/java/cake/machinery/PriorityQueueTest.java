@@ -112,4 +112,51 @@ public class PriorityQueueTest {
         priorityQueue.enqueue(null);
     }
 
+    @Test
+    public void testDelete() {
+        // given:
+        WorkOrderRequest workRequest = new WorkOrderRequest(id(), today());
+        priorityQueue.enqueue(workRequest);
+
+        // when:
+        WorkOrderRequest deletedRequest = priorityQueue.delete(id());
+
+        // then:
+        assertEquals(workRequest, deletedRequest);
+    }
+
+    @Test
+    public void testDeleteNotFound() {
+        // when:
+        WorkOrderRequest deletedRequest = priorityQueue.delete(id());
+
+        // then:
+        assertNull(deletedRequest);
+    }
+
+    @Test
+    public void testPosition() {
+        // given:
+        WorkOrderRequest one = new WorkOrderRequest(1234l, today());
+        WorkOrderRequest two = new WorkOrderRequest(1235l, today());
+
+        priorityQueue.enqueue(one);
+        priorityQueue.enqueue(two);
+
+        // when:
+        int position = priorityQueue.position(two.id());
+
+        // then:
+        assertEquals(1, position);
+    }
+
+    @Test
+    public void testPositionNotFound() {
+        // when:
+        Integer position = priorityQueue.position(id());
+
+        // then:
+        assertNull(position);
+    }
+
 }

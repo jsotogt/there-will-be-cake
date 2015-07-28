@@ -52,4 +52,53 @@ public class PriorityQueue {
 
         return queue.add(newRequest);
     }
+
+    /**
+     * @return a list containing the queued ids, in order
+     */
+    public synchronized List<Long> getListOfIds() {
+
+        List<Long> list = new ArrayList<>();
+
+        for(WorkOrderRequest w : queue) {
+            list.add(w.id());
+        }
+
+        return list;
+
+    }
+
+    /**
+     * Removes the work request with the given id, if one is present.
+     * @param id the id of the work request to remove
+     * @return the removed work request, or null if not matching request was found
+     */
+    public synchronized WorkOrderRequest delete(Long id) {
+
+        for(int i=0; i<queue.size(); i++) {
+            WorkOrderRequest w = queue.get(i);
+            if(w.id().equals(id)) {
+                return queue.remove(i);
+            }
+        }
+
+        return  null;
+
+    }
+
+    /**
+     * @return the position in the queue of the work request with the given id, or null if not found
+     */
+    public synchronized Integer position(Long id) {
+
+        for(int i=0; i<queue.size(); i++) {
+            WorkOrderRequest w = queue.get(i);
+            if(w.id().equals(id)) {
+                return i;
+            }
+        }
+
+        return  null;
+
+    }
 }

@@ -78,4 +78,37 @@ public class PriorityQueueServiceTest {
         // then:
         verify(priorityQueue).dequeue();
     }
+
+    @Test
+    public void testList() throws Exception {
+        // when:
+        priorityQueueService.list();
+
+        // then:
+        verify(priorityQueue).getListOfIds();
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        // given:
+        Long id = 1234l;
+
+        // when:
+        priorityQueueService.delete(id);
+
+        // then:
+        verify(priorityQueue).delete(id);
+    }
+
+    @Test
+    public void testPosition() throws Exception {
+        // given:
+        Long id = 1234l;
+
+        // when:
+        priorityQueueService.position(id);
+
+        // then:
+        verify(priorityQueue).position(id);
+    }
 }

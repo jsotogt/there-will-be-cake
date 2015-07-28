@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PriorityQueueService {
@@ -36,5 +37,26 @@ public class PriorityQueueService {
      */
     public WorkOrderRequest dequeue() {
         return priorityQueue.dequeue();
+    }
+
+    /**
+     * @see PriorityQueue#getListOfIds()
+     */
+    public List<Long> list() {
+        return priorityQueue.getListOfIds();
+    }
+
+    /**
+     * @see PriorityQueue#delete(Long)
+     */
+    public WorkOrderRequest delete(Long id) {
+        return priorityQueue.delete(id);
+    }
+
+    /**
+     * @see PriorityQueue#position(Long)
+     */
+    public Integer position(Long id) {
+        return priorityQueue.position(id);
     }
 }
