@@ -4,6 +4,7 @@ import cake.models.WorkOrderRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,7 +51,10 @@ public class PriorityQueue {
             }
         }
 
-        return queue.add(newRequest);
+        queue.add(newRequest);
+        Collections.sort(queue, new WorkOrderComparator());
+
+        return true;
     }
 
     /**
