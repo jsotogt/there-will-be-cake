@@ -1,5 +1,7 @@
 package cake.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 /**
@@ -15,10 +17,12 @@ public class WorkOrderRequest {
         this.time = time;
     }
 
+    @JsonProperty
     public Long id() {
         return id;
     }
 
+    @JsonProperty
     public Date time() {
         return time;
     }

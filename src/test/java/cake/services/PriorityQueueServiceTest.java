@@ -29,6 +29,7 @@ public class PriorityQueueServiceTest {
         priorityQueueService = new PriorityQueueService();
         priorityQueue =  mock(PriorityQueue.class);
         priorityQueueService.priorityQueue = priorityQueue;
+        priorityQueueService.timeformat = "yyyyMMdd'T'hhmmss'Z'";
     }
 
     @After
@@ -39,7 +40,7 @@ public class PriorityQueueServiceTest {
     @Test
     public void testParse() throws Exception {
         // given:
-        String dateString = "20150820T080000";
+        String dateString = "20150820T080000Z";
         Date expectedDate = new DateTime(2015,8,20,8,0,0).toDate();
 
         // when:

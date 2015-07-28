@@ -3,6 +3,7 @@ package cake.services;
 import cake.machinery.PriorityQueue;
 import cake.models.WorkOrderRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -16,13 +17,16 @@ public class PriorityQueueService {
     @Autowired
     PriorityQueue priorityQueue;
 
+    @Value("${time.format}")
+    String timeformat;
+
     /**
-     * Parses the given time-string using the slightly modified ISO8601 parse: yyyyMMdd'T'hhmmss.
+     * Parses the given time-string using ISO8601: yyyyMMddThhmmssZ.
      * @param dateTimeString the ISO8601 time-string to be parsed
      * @return a Date instance set to the given time-string
      */
     public Date parse(String dateTimeString) throws ParseException {
-        return new SimpleDateFormat("yyyyMMdd'T'hhmmss").parse(dateTimeString);
+        return new SimpleDateFormat(timeformat).parse(dateTimeString);
     }
 
     /**
