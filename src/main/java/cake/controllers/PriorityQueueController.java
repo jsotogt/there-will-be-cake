@@ -28,18 +28,14 @@ public class PriorityQueueController {
             return new ResponseEntity<>("invalid id", HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
-        Date date;
+        WorkOrderRequest workRequest;
         try {
-            date = priorityQueueService.parse(time);
-        } catch (ParseException e) {
+            workRequest = priorityQueueService.workOrderRequestForIdAndTime(id, time);
+        } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        ClassId classId = priorityQueueService.getClassId(id);
-
-        WorkOrderRequest newRequest = new WorkOrderRequest(id, date, classId);
-
-        if(priorityQueueService.enqueue(newRequest)){
+        if(priorityQueueService.enqueue(workRequest)){
             return new ResponseEntity(HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Requester already has a pending request", HttpStatus.CONFLICT);

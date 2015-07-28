@@ -38,9 +38,10 @@ public class WorkOrderRequestTest {
         Long id = id();
         Date date = now();
         ClassId classId = ClassId.NORMAL;
+        Long rank = 0l;
 
         // when:
-        WorkOrderRequest w = new WorkOrderRequest(id, date, classId);
+        WorkOrderRequest w = new WorkOrderRequest(id, date, classId, rank);
 
         // then:
         assertEquals(id, w.id());
@@ -52,9 +53,10 @@ public class WorkOrderRequestTest {
         Long id = id();
         Date date = now();
         ClassId classId = ClassId.NORMAL;
+        Long rank = 0l;
 
         // when:
-        WorkOrderRequest w = new WorkOrderRequest(id, date, classId);
+        WorkOrderRequest w = new WorkOrderRequest(id, date, classId, rank);
 
         // then:
         assertEquals(date, w.time());

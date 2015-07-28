@@ -14,11 +14,13 @@ public class WorkOrderRequest {
     private Long id;
     private Date time;
     private ClassId classId;
+    private Long rank;
 
-    public WorkOrderRequest(Long id, Date time, ClassId classId) {
+    public WorkOrderRequest(Long id, Date time, ClassId classId, Long rank) {
         this.id = id;
         this.time = time;
         this.classId = classId;
+        this.rank = rank;
     }
 
     @JsonProperty
@@ -32,7 +34,12 @@ public class WorkOrderRequest {
     }
 
     @JsonIgnore
-    public ClassId getClassId() {
+    public ClassId classId() {
         return classId;
+    }
+
+    @JsonIgnore
+    public Long rank() {
+        return rank;
     }
 }

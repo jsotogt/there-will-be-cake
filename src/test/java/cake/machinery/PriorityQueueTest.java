@@ -45,6 +45,10 @@ public class PriorityQueueTest {
         return ClassId.NORMAL;
     }
 
+    private Long rank() {
+        return 0l;
+    }
+
     public Date tomorrow() {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.DAY_OF_MONTH, 1);
@@ -119,7 +123,7 @@ public class PriorityQueueTest {
     @Test
     public void testDelete() {
         // given:
-        WorkOrderRequest workRequest = new WorkOrderRequest(id(), today(), classId());
+        WorkOrderRequest workRequest = new WorkOrderRequest(id(), today(), classId(), rank());
         priorityQueue.enqueue(workRequest);
 
         // when:
@@ -141,8 +145,8 @@ public class PriorityQueueTest {
     @Test
     public void testPosition() {
         // given:
-        WorkOrderRequest one = new WorkOrderRequest(1234l, today(), classId());
-        WorkOrderRequest two = new WorkOrderRequest(1235l, today(), classId());
+        WorkOrderRequest one = new WorkOrderRequest(1234l, today(), classId(), rank());
+        WorkOrderRequest two = new WorkOrderRequest(1235l, today(), classId(), rank());
 
         priorityQueue.enqueue(one);
         priorityQueue.enqueue(two);

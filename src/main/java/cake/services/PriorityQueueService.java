@@ -57,6 +57,21 @@ public class PriorityQueueService {
 
     }
 
+    public Long rank(Long id, ClassId classId) {
+        return 0l; // TODO implement
+    }
+
+    public WorkOrderRequest workOrderRequestForIdAndTime(Long id, String time) throws Exception {
+
+        Date date = parse(time);
+
+        ClassId classId = getClassId(id);
+
+        Long rank = rank(id, classId);
+
+        return new WorkOrderRequest(id, date, classId, rank);
+    }
+
     /**
      * @see PriorityQueue#enqueue(WorkOrderRequest)
      */
