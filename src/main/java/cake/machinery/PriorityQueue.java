@@ -53,7 +53,7 @@ public class PriorityQueue {
         }
 
         queue.add(newRequest);
-        Collections.sort(queue, Collections.reverseOrder(new WorkOrderComparator(newRequest.time())));
+        Collections.sort(queue, Collections.reverseOrder(new WorkOrderComparator(new Date()))); // assume all dates before current machine time
 
         return true;
     }
