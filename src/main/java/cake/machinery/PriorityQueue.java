@@ -115,12 +115,19 @@ public class PriorityQueue {
     public synchronized Double average(Date reference) {
 
         double t = 0;
+        int n = 0;
 
         for(WorkOrderRequest w : queue) {
+
+            if(w.time().getTime() > reference.getTime()) { // ignore dates in the future
+                continue;
+            }
+
             t = t + (reference.getTime() - w.time().getTime()) / 1000.0;
+            n = n + 1;
         }
 
-        return (t / queue.size());
+        return (t / n);
 
     }
 }
