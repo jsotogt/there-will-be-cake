@@ -6,10 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.Date;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Test for WorkOrderComparator.
@@ -17,11 +18,11 @@ import static org.junit.Assert.*;
 public class WorkOrderComparatorTest {
 
     // class under test
-    WorkOrderComparator workOrderComparator = new WorkOrderComparator();
+    WorkOrderComparator workOrderComparator;
 
     @Before
     public void setUp() throws Exception {
-
+        workOrderComparator = new WorkOrderComparator(now());
     }
 
     @After
@@ -29,7 +30,7 @@ public class WorkOrderComparatorTest {
 
     }
 
-    private Date now() { return new Date(); }
+    public Date now() { return new Date(); }
 
     public long id() {
         return 9223372036854775807l;
@@ -39,7 +40,7 @@ public class WorkOrderComparatorTest {
         return 0;
     }
 
-    private Date yesterday() {
+    public Date yesterday() {
         Calendar c = Calendar.getInstance();
         c.add(Calendar.DAY_OF_MONTH, -1);
         return c.getTime();
@@ -48,8 +49,8 @@ public class WorkOrderComparatorTest {
     @Test
     public void testCompareOverrideNormal() throws Exception {
         // given:
-        WorkOrderRequest o1 = new WorkOrderRequest(id(), now(), ClassId.OVERRIDE, rank());
-        WorkOrderRequest o2 = new WorkOrderRequest(id(), now(), ClassId.NORMAL, rank());
+        WorkOrderRequest o1 = new WorkOrderRequest(id(), now(), ClassId.OVERRIDE);
+        WorkOrderRequest o2 = new WorkOrderRequest(id(), now(), ClassId.NORMAL);
 
         // when:
         int result = workOrderComparator.compare(o1, o2);
@@ -61,8 +62,8 @@ public class WorkOrderComparatorTest {
     @Test
     public void testCompareNormalOverride() throws Exception {
         // given:
-        WorkOrderRequest o1 = new WorkOrderRequest(id(), now(), ClassId.NORMAL, rank());
-        WorkOrderRequest o2 = new WorkOrderRequest(id(), now(), ClassId.OVERRIDE, rank());
+        WorkOrderRequest o1 = new WorkOrderRequest(id(), now(), ClassId.NORMAL);
+        WorkOrderRequest o2 = new WorkOrderRequest(id(), now(), ClassId.OVERRIDE);
 
         // when:
         int result = workOrderComparator.compare(o1, o2);
@@ -74,8 +75,8 @@ public class WorkOrderComparatorTest {
     @Test
     public void testCompareOverrideOverride() throws Exception {
         // given:
-        WorkOrderRequest o1 = new WorkOrderRequest(id(), yesterday(), ClassId.OVERRIDE, rank());
-        WorkOrderRequest o2 = new WorkOrderRequest(id(), now(), ClassId.OVERRIDE, rank());
+        WorkOrderRequest o1 = new WorkOrderRequest(id(), yesterday(), ClassId.OVERRIDE);
+        WorkOrderRequest o2 = new WorkOrderRequest(id(), now(), ClassId.OVERRIDE);
 
         // when:
         int result = workOrderComparator.compare(o1, o2);
@@ -87,13 +88,97 @@ public class WorkOrderComparatorTest {
     @Test
     public void testCompareNormalNormal() throws Exception {
         // given:
-        WorkOrderRequest o1 = new WorkOrderRequest(id(), yesterday(), ClassId.NORMAL, 10.0);
-        WorkOrderRequest o2 = new WorkOrderRequest(id(), now(), ClassId.NORMAL, 20.0);
+        WorkOrderRequest o1 = new WorkOrderRequest(id(), yesterday(), ClassId.NORMAL);
+        WorkOrderRequest o2 = new WorkOrderRequest(id(), now(), ClassId.NORMAL);
 
         // when:
         int result = workOrderComparator.compare(o1, o2);
 
         // then:
-        assertTrue( result < 0);
+        assertTrue( result > 0);
+    }
+
+    @Test
+    public void testRankNormal() {
+        // given:
+        ClassId classId = ClassId.NORMAL;
+        Date date = mock(Date.class);
+        Double n = 10.0;
+
+        // when:
+        double rank = workOrderComparator.rank(classId, n);
+
+        // then:
+        assertTrue(10.0 == rank);
+    }
+
+    @Test
+    public void testRankOverride() {
+        // given:
+        ClassId classId = ClassId.OVERRIDE;
+        Date date = mock(Date.class);
+        Double n = 10.0;
+
+        // when:
+        double rank = workOrderComparator.rank(classId, n);
+
+        // then:
+        assertTrue(10.0 == rank);
+    }
+
+    @Test
+    public void testRankPriorityMin() {
+        // given:
+        ClassId classId = ClassId.PRIORITY;
+        Date date = mock(Date.class);
+        Double n = 1.0;
+
+        // when:
+        double rank = workOrderComparator.rank(classId, n);
+
+        // then:
+        assertTrue(3.0 == rank);
+    }
+
+    @Test
+    public void testRankPriorityLog() {
+        // given:
+        ClassId classId = ClassId.PRIORITY;
+        Date date = mock(Date.class);
+        Double n = 10.0;
+
+        // when:
+        double rank = workOrderComparator.rank(classId, n);
+
+        // then:
+        assertTrue(10.0 == rank);
+    }
+
+    @Test
+    public void testRankVIPMin() {
+        // given:
+        ClassId classId = ClassId.VIP;
+        Date date = mock(Date.class);
+        Double n = 1.0;
+
+        // when:
+        double rank = workOrderComparator.rank(classId, n);
+
+        // then:
+        assertTrue(4.0 == rank);
+    }
+
+    @Test
+    public void testRankVIPLog() {
+        // given:
+        ClassId classId = ClassId.VIP;
+        Date date = mock(Date.class);
+        Double n = 10.0;
+
+        // when:
+        double rank = workOrderComparator.rank(classId, n);
+
+        // then:
+        assertTrue(20.0 == rank);
     }
 }

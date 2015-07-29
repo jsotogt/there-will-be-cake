@@ -52,7 +52,7 @@ public class PriorityQueue {
         }
 
         queue.add(newRequest);
-        Collections.sort(queue, new WorkOrderComparator());
+        Collections.sort(queue, new WorkOrderComparator(newRequest.time()));
 
         return true;
     }
