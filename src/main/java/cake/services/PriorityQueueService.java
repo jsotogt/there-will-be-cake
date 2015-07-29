@@ -57,31 +57,10 @@ public class PriorityQueueService {
 
     }
 
-    public double rank(ClassId classId, Date date) {
-
-        double n = date.getTime() / 1000; // in seconds
-
-        if(classId == ClassId.PRIORITY) {
-            return Math.max(3, n * Math.log10(n)); // max(3, n log n)
-        }
-
-        if(classId == ClassId.VIP) {
-            return Math.max(4, 2 * n * Math.log10(n)); // max(4, 2n log n)
-        }
-
-        return n; // NORMAL & OVERRIDE
-
-    }
-
     public WorkOrderRequest workOrderRequestForIdAndTime(Long id, String time) throws Exception {
 
-        Date date = parse(time);
+        return new WorkOrderRequest(id, parse(time), getClassId(id));
 
-        ClassId classId = getClassId(id);
-
-        double rank = rank(classId, date);
-
-        return new WorkOrderRequest(id, date, classId, rank);
     }
 
     /**
