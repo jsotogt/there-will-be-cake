@@ -194,7 +194,7 @@ public class PriorityQueueServiceTest {
         when(date.getTime()).thenReturn(10000l);
 
         // when:
-        double rank = priorityQueueService.rank(classId, date);
+        double rank = priorityQueueService.getRank(classId, date);
 
         // then:
         assertTrue(10.0 == rank);
@@ -208,7 +208,7 @@ public class PriorityQueueServiceTest {
         when(date.getTime()).thenReturn(10000l);
 
         // when:
-        double rank = priorityQueueService.rank(classId, date);
+        double rank = priorityQueueService.getRank(classId, date);
 
         // then:
         assertTrue(10.0 == rank);
@@ -222,7 +222,7 @@ public class PriorityQueueServiceTest {
         when(date.getTime()).thenReturn(1000l);
 
         // when:
-        double rank = priorityQueueService.rank(classId, date);
+        double rank = priorityQueueService.getRank(classId, date);
 
         // then:
         assertTrue(3.0 == rank);
@@ -237,7 +237,7 @@ public class PriorityQueueServiceTest {
         when(date.getTime()).thenReturn(10000l);
 
         // when:
-        double rank = priorityQueueService.rank(classId, date);
+        double rank = priorityQueueService.getRank(classId, date);
 
         // then:
         assertTrue(10.0 == rank);
@@ -251,7 +251,7 @@ public class PriorityQueueServiceTest {
         when(date.getTime()).thenReturn(1000l);
 
         // when:
-        double rank = priorityQueueService.rank(classId, date);
+        double rank = priorityQueueService.getRank(classId, date);
 
         // then:
         assertTrue(4.0 == rank);
@@ -265,7 +265,7 @@ public class PriorityQueueServiceTest {
         when(date.getTime()).thenReturn(10000l);
 
         // when:
-        double rank = priorityQueueService.rank(classId, date);
+        double rank = priorityQueueService.getRank(classId, date);
 
         // then:
         assertTrue(20.0 == rank);

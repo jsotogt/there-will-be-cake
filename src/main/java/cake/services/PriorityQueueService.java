@@ -57,7 +57,13 @@ public class PriorityQueueService {
 
     }
 
-    public double rank(ClassId classId, Date date) {
+    /**
+     * Ranks a ClassId according to the time it has been in the queue.
+     * @param classId
+     * @param date
+     * @return
+     */
+    public double getRank(ClassId classId, Date date) {
 
         double n = date.getTime() / 1000; // in seconds
 
@@ -79,7 +85,7 @@ public class PriorityQueueService {
 
         ClassId classId = getClassId(id);
 
-        double rank = rank(classId, date);
+        double rank = getRank(classId, date);
 
         return new WorkOrderRequest(id, date, classId, rank);
     }

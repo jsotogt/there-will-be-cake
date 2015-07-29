@@ -20,11 +20,7 @@ public class WorkOrderComparator implements Comparator<WorkOrderRequest> {
             return -1;
         }
 
-        if(o1.classId() == ClassId.OVERRIDE && o2.classId() == ClassId.OVERRIDE) {
-            return o2.time().compareTo(o1.time());
-        }
-
-        return o1.rank().compareTo(o2.rank());
+        return o1.rank().compareTo(o2.rank()); // o2.time().compareTo(o1.time())
     }
 
 }
