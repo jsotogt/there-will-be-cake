@@ -2,6 +2,11 @@ There Will Be Cake
 ==================
 A project for code writers and cake lovers.
 
+The Stack
+---------
+* Gradle 2.3
+* Spring Boot 1.2.5
+
 Building The Cake
 --------------------
 * gradle build
