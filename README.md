@@ -16,9 +16,9 @@ Date Format
 
 Endpoints
 ---------
-1. endpoint
-2. endpoint
-3. endpoint
-4. endpoint
-5. endpoint
-6. endpoint
+1. /requests/{id}/{time} (POST)
+2. /requests/top (POST)
+3. /requests/ids (GET)
+4. /requests/{id} (DELETE)
+5. /requests/{id}/position (GET)
+6. /requests/average/{time} (GET)
