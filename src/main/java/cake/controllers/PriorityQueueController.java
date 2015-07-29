@@ -90,9 +90,18 @@ public class PriorityQueueController {
     }
 
     @RequestMapping(value = "/requests/average/{time}", method = RequestMethod.GET)
-    public ResponseEntity<Long> average(@PathVariable("time") String time) {
+    public ResponseEntity<Double> average(@PathVariable("time") String time) {
 
-        return new ResponseEntity(HttpStatus.OK); // TODO implement
+        Date reference;
+        try {
+            reference = priorityQueueService.parse(time);
+        } catch (ParseException e) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        Double avg = priorityQueueService.average(reference);
+
+        return new ResponseEntity(avg, HttpStatus.OK);
 
     }
 }

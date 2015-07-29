@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public class PriorityQueue {
         }
 
         queue.add(newRequest);
-        Collections.sort(queue, new WorkOrderComparator(newRequest.time()));
+        Collections.sort(queue, Collections.reverseOrder(new WorkOrderComparator(newRequest.time())));
 
         return true;
     }
@@ -103,6 +104,23 @@ public class PriorityQueue {
         }
 
         return  null;
+
+    }
+
+    /**
+     * Returns the average waiting time for all elements in the queue.
+     * @param reference the current system time
+     * @return the average waiting time in seconds
+     */
+    public synchronized Double average(Date reference) {
+
+        double t = 0;
+
+        for(WorkOrderRequest w : queue) {
+            t = t + (reference.getTime() - w.time().getTime()) / 1000.0;
+        }
+
+        return (t / queue.size());
 
     }
 }

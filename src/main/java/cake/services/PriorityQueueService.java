@@ -97,4 +97,11 @@ public class PriorityQueueService {
     public Integer position(Long id) {
         return priorityQueue.position(id);
     }
+
+    /**
+     * @see PriorityQueue#average(Date)
+     */
+    public Double average(Date reference) {
+        return priorityQueue.average(reference);
+    }
 }
