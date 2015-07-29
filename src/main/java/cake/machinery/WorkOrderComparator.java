@@ -26,11 +26,11 @@ public class WorkOrderComparator implements Comparator<WorkOrderRequest> {
     public double rank(ClassId classId, Double n) {
 
         if(classId == ClassId.PRIORITY) {
-            return Math.max(3, n * Math.log10(n)); // max(3, n log n)
+            return Math.max(3, n * Math.log(n)); // max(3, n log n)
         }
 
         if(classId == ClassId.VIP) {
-            return Math.max(4, 2 * n * Math.log10(n)); // max(4, 2n log n)
+            return Math.max(4, 2 * n * Math.log(n)); // max(4, 2n log n)
         }
 
         return n; // NORMAL & OVERRIDE

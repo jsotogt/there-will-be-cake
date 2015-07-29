@@ -151,7 +151,7 @@ public class WorkOrderComparatorTest {
         double rank = workOrderComparator.rank(classId, n);
 
         // then:
-        assertTrue(10.0 == rank);
+        assertEquals(23, rank, 0.1);
     }
 
     @Test
@@ -179,6 +179,6 @@ public class WorkOrderComparatorTest {
         double rank = workOrderComparator.rank(classId, n);
 
         // then:
-        assertTrue(20.0 == rank);
+        assertEquals(46, rank, 0.1);
     }
 }
