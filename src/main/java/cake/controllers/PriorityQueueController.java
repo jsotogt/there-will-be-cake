@@ -43,7 +43,7 @@ public class PriorityQueueController {
 
     }
 
-    @RequestMapping(value = "/requests", method = RequestMethod.POST)
+    @RequestMapping(value = "/requests/top", method = RequestMethod.POST)
     public ResponseEntity<WorkOrderRequest> dequeue() {
 
         WorkOrderRequest workRequest = priorityQueueService.dequeue();
@@ -56,7 +56,7 @@ public class PriorityQueueController {
 
     }
 
-    @RequestMapping(value = "/requests", method = RequestMethod.GET)
+    @RequestMapping(value = "/requests/ids", method = RequestMethod.GET)
     public ResponseEntity<List<WorkOrderRequest>> list() {
         return new ResponseEntity(priorityQueueService.list(), HttpStatus.OK);
     }
