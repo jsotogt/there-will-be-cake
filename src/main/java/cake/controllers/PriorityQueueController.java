@@ -18,8 +18,12 @@ import java.util.List;
 @RestController
 public class PriorityQueueController {
 
+    private PriorityQueueService priorityQueueService;
+
     @Autowired
-    PriorityQueueService priorityQueueService;
+    PriorityQueueController(PriorityQueueService priorityQueueService) {
+        this.priorityQueueService = priorityQueueService;
+    }
 
     @RequestMapping(value = "/requests/{id}/{time}", method = RequestMethod.POST)
     public ResponseEntity<String> enqueue(@PathVariable("id") Long id, @PathVariable("time") String time) {

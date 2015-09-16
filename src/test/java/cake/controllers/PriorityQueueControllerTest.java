@@ -28,9 +28,10 @@ public class PriorityQueueControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        priorityQueueController = new PriorityQueueController();
+
         priorityQueueService = mock(PriorityQueueService.class);
-        priorityQueueController.priorityQueueService = priorityQueueService;
+        priorityQueueController = new PriorityQueueController(priorityQueueService);
+
     }
 
     @After
